@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>保暖材料硬数据 — 羽绒 / 合成棉 / 抓绒</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:#fff;color:#1a1a1a;
+    font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    font-variant-numeric:tabular-nums;
+    padding:0 24px 100px;
+  }
+  .wrap{max-width:960px;margin:0 auto}
+
+  /* ---------- 头部 ---------- */
+  header{padding:72px 0 0;border-bottom:2px solid #1a1a1a;padding-bottom:32px;margin-bottom:8px}
+  .kicker{font-size:12px;letter-spacing:.22em;color:#8a8a8a;text-transform:uppercase;margin-bottom:20px}
+  h1{font-size:44px;line-height:1.15;font-weight:800;letter-spacing:-.02em;margin-bottom:18px}
+  h1 em{font-style:normal;color:#a63a2b}
+  .sub{font-size:17px;color:#555;line-height:1.65;max-width:720px}
+  .meta{margin-top:26px;font-size:13px;color:#8a8a8a;display:flex;gap:28px;flex-wrap:wrap}
+  .meta b{color:#555;font-weight:600}
+
+  /* ---------- 结论块 ---------- */
+  .verdict{
+    margin:44px 0 8px;padding:32px 36px;background:#faf8f5;border-left:4px solid #a63a2b;
+  }
+  .verdict .tag{font-size:12px;letter-spacing:.18em;color:#a63a2b;margin-bottom:14px}
+  .verdict p{font-size:19px;line-height:1.7;font-weight:500}
+  .verdict p+p{margin-top:10px}
+  .verdict .num{color:#a63a2b;font-weight:800}
+
+  /* ---------- 章节 ---------- */
+  section{margin-top:72px}
+  .secnum{font-size:12px;letter-spacing:.2em;color:#a63a2b;margin-bottom:8px}
+  h2{font-size:28px;line-height:1.3;font-weight:800;letter-spacing:-.01em;margin-bottom:8px}
+  h2 .thin{font-weight:400;color:#888}
+  .lede{font-size:16px;color:#555;margin-bottom:28px;max-width:780px}
+  h3{font-size:18px;font-weight:700;margin:36px 0 12px;padding-top:20px;border-top:1px solid #e8e8e8}
+  h3:first-of-type{border-top:none;padding-top:0}
+  p{margin-bottom:16px;max-width:800px}
+  p.note{font-size:13px;color:#888;line-height:1.6}
+  strong{font-weight:700}
+  .hl{background:linear-gradient(transparent 62%,#f5dcd4 62%);padding:0 2px}
+
+  /* ---------- 表格 ---------- */
+  .tblwrap{overflow-x:auto;margin:24px 0 10px;border-top:2px solid #1a1a1a}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+  th{
+    text-align:right;font-weight:600;font-size:12px;letter-spacing:.03em;color:#666;
+    padding:12px 10px;border-bottom:1px solid #ccc;vertical-align:bottom;background:#fafafa;
+  }
+  th:first-child,td:first-child{text-align:left}
+  td{padding:10px;text-align:right;border-bottom:1px solid #ececec;line-height:1.45}
+  td:first-child{font-weight:500}
+  tbody tr:hover{background:#fcfaf8}
+  .cat{font-size:11px;color:#999;display:block;font-weight:400;letter-spacing:.02em}
+  .best{color:#a63a2b;font-weight:700}
+  .mute{color:#aaa}
+  .cap{font-size:12.5px;color:#888;line-height:1.6;margin:10px 0 0}
+  .cap b{color:#666}
+
+  /* ---------- 图表 ---------- */
+  figure{margin:28px 0 12px}
+  figure>div{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  figure svg{min-width:560px}
+  figcaption{font-size:12.5px;color:#888;line-height:1.6;margin-top:10px}
+  figcaption b{color:#666}
+  svg{display:block;max-width:100%;height:auto;overflow:visible}
+
+  /* ---------- 结论列表 ---------- */
+  .takeaways{margin:32px 0;border-top:1px solid #ddd}
+  .tk{display:grid;grid-template-columns:38px 1fr;gap:0 18px;padding:18px 0;border-bottom:1px solid #ececec}
+  .tk .n{font-size:12px;color:#a63a2b;padding-top:4px;letter-spacing:.1em}
+  .tk h4{font-size:16px;font-weight:700;margin-bottom:4px;grid-column:2}
+  .tk p{font-size:14.5px;color:#555;margin:0;grid-column:2;max-width:none}
+
+  /* ---------- 场景表 ---------- */
+  .scenario{width:100%;border-collapse:collapse;font-size:14px;margin:20px 0}
+  .scenario th{text-align:left;background:#1a1a1a;color:#fff;padding:11px 14px;font-size:12px;letter-spacing:.06em;font-weight:600}
+  .scenario td{padding:13px 14px;border-bottom:1px solid #ececec;text-align:left;vertical-align:top}
+  .scenario td:first-child{font-weight:600;white-space:nowrap}
+  .scenario .pick{color:#a63a2b;font-weight:600}
+
+  /* ---------- 引用 ---------- */
+  .src{margin-top:14px;padding-left:0;font-size:13px;color:#777;line-height:1.8;list-style:none}
+  .src li{margin-bottom:10px;padding-left:24px;text-indent:-24px}
+  .src a{color:#2b5d7d;text-decoration:none;border-bottom:1px solid #cfdde6}
+  .src a:hover{background:#eef4f7}
+  sup{font-size:11px;color:#a63a2b;font-weight:600;padding-left:1px}
+
+  /* ---------- 页脚 ---------- */
+  footer{margin-top:88px;padding-top:28px;border-top:1px solid #ddd;font-size:12.5px;color:#999;line-height:1.8}
+
+  @media(max-width:720px){
+    body{padding:0 18px 70px}
+    header{padding-top:44px}
+    h1{font-size:30px}
+    .verdict{padding:24px 22px}
+    .verdict p{font-size:17px}
+    h2{font-size:22px}
+    .sub{font-size:15.5px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker"> MATERIALS · THERMAL DATA</div>
+  <h1>保暖材料硬数据<br>从 clo 到<em>每克每元</em></h1>
+  <p class="sub">羽绒、合成棉、抓绒的实测热阻对照。数据来自热板法实测、暖体假人标定的睡袋测试，以及能查到出处的论文——不是厂商宣传页上那个数。</p>
+  <div class="meta">
+    <span>测试口径 <b>ASTM D1518 / F1868 / ISO 11092</b></span>
+    <span>数据更新 <b>2026-11</b></span>
+    <span>样本 <b>20 种材料</b></span>
+  </div>
+</header>
+
+<div class="verdict">
+  <div class="tag">先说结论</div>
+  <p>按重量算，<span class="num">800 蓬羽绒</span>的保暖约是金标 P 棉的 <span class="num">2 倍</span>、200 克抓绒的 <span class="num">11 倍</span>。</p>
+  <p>但网上那张传了十年的 clo/oz 表把倍率吹到了 3 倍以上。真实差距没有那么大——因为那张表把整衣口径和裸絮片口径混在一起算了。</p>
+  <p>按每块钱买到的保暖算，赢家不是羽绒，是 <span class="num">Climashield Apex</span>。</p>
+</div>
+
+<section>
+  <div class="secnum">01 / 指标</div>
+  <h2>clo 是什么，以及那张流传表错在哪</h2>
+  <p class="lede">不先把口径说清楚，后面所有数字都是白扯。这一节有点枯燥，但不看会被人忽悠。</p>
+
+  <h3>一个 clo 有多大</h3>
+  <p>clo 是热阻单位，1941 年 Gagge 和 Burton 提出。定义是：室温 21℃、湿度 50%、风速 10cm/s 的环境里，一个静坐的人保持体表 33℃ 感到舒适，所穿衣服的热阻就是 1 clo。换算成国际单位：<strong>1 clo = 0.155 m²·K/W</strong>。</p>
+  <p>这个单位的好处是能直接换算成温差。穿 2 clo 的衣服，在 0℃ 环境里静坐，体感大约相当于穿 1 clo 在 10℃ 里。所以你会在睡袋标定里看到它——EN 13537 和现在的 ISO 23537 用的就是这套东西。</p>
+
+  <h3>同一个材料，三个数字，差一倍</h3>
+  <p>问题出在分母。clo 除以什么，决定了你看到的数字是几。</p>
+  <p><strong>clo/oz</strong>——每盎司材料多少 clo。分母是质量，但没说是"材料质量"还是"整件衣服质量"。<strong>clo/oz/yd²</strong>——每平方码铺 1 盎司材料时的 clo。分母是面密度，这才是热板法能测的。<strong>clo/g</strong>——每克多少 clo，国内文章爱用这个，但它是前两个的衍生，换算时经常差一个 0.836 的系数（yd² 和 m² 的比）。</p>
+  <p>三个口径混用，结果就是同一块 Primaloft Gold，有人说 0.92，有人说 0.47。都没说谎，只是分母不一样。</p>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr>
+        <th>材料</th><th>厂商标称<br>clo/oz/yd²</th><th>流传表<br>clo/oz</th><th>热板实测<br>clo/oz/yd²</th><th>实测 / 标称</th>
+      </tr></thead>
+      <tbody id="tbl-gap"></tbody>
+    </table>
+  </div>
+  <p class="cap"><b>差额来源：</b>厂商标称多为单层、无 scrim、理想密度下的 ASTM C518 值；热板实测含 scrim、按实际克重折算。羽绒一列是整衣反推，不是同一个量，仅供参考。<sup>[1][2]</sup></p>
+
+  <p>看最后一列。合成棉的实测值普遍只有标称的 <span class="hl">50–70%</span>。这不是厂商造假，是测试条件不同——但这意味着你拿厂商数字横向比产品，比出来的排序是失真的。</p>
+  <p>更麻烦的是羽绒。羽绒根本做不成絮片，没法上热板，所以羽绒行业（IDFB、Allied Feather）明确表示<strong>不会给任何单一品质的羽绒标 clo 值</strong><sup>[2]</sup>。你在中文网上看到的"800 蓬 = 1.68 clo/oz"，来源是早年 BPL 论坛一位会员按整衣重量反推的经验值，不是实验室测出来的。</p>
+  <p>这就是为什么那张表里 650 蓬是 1.0、800 蓬突然跳到 1.68——不符合物理规律。真实的曲线要平缓得多。</p>
+</section>
+
+<section>
+  <div class="secnum">02 / 干态</div>
+  <h2>实测：谁重、谁厚、谁暖 <span class="thin">干态，无风</span></h2>
+  <p class="lede">这一节的数据来自 Stephen Seeber 在 Backpacking Light 上发表的系列测试。用防护热板（Guarded Hot Plate），按 ASTM D1518-11a / F1868-02 / ISO 11092，扣掉表面空气膜，只算材料本身的 intrinsic clo。是目前公开数据里方法最干净的一套。</p>
+
+  <h3>主表</h3>
+  <div class="tblwrap">
+    <table>
+      <thead><tr>
+        <th>材料</th><th>克重<br>g/m²</th><th>厚度<br>mm</th><th>总 clo</th><th>clo per<br>oz/yd²</th><th>clo per<br>inch</th><th>每克·平米<br>clo</th>
+      </tr></thead>
+      <tbody id="tbl-main"></tbody>
+    </table>
+  </div>
+  <p class="cap">"每克·平米 clo"= 每平方米铺 1 克材料提供的 clo，可直接理解成"每克能买多少保暖"。<b>数值越大越轻。</b>数据源：Seeber 2021/2022，热板实测<sup>[1]</sup>。</p>
+
+  <h3>把三个维度画在一张图上</h3>
+  <p>横轴是重量效率（同样重量的保暖），纵轴是厚度效率（同样厚度的保暖）。一个材料在图上越靠右上越好。圆点大小表示面密度。</p>
+
+  <figure>
+    <div id="fig-scatter"></div>
+    <figcaption><b>图 1｜重量效率 vs 厚度效率。</b>抓绒全部挤在右下角：单位厚度不差，单位重量极差。合成棉在中下，羽绒在右上。两者之间那道横着的空白，就是"羽绒贵"的物理原因。</figcaption>
+  </figure>
+
+  <p>这张图最反直觉的地方是：<strong>抓绒的单位厚度保暖比合成棉还好</strong>（3.3–3.8 clo/inch vs 2.4–3.2）。也就是说，同样厚的一层，抓绒不比 P 棉冷多少。</p>
+  <p>但抓绒的密度是合成棉的 2–4 倍。同样厚度下它重得多，所以"同样重量"这个维度上它彻底输了。这就是为什么抓绒适合做中层贴身，不适合做轻量化保暖层——<span class="hl">你不缺那几毫米厚度，你缺的是那几百克重量</span>。</p>
+
+  <h3>达到 2.0 clo 需要多少材料</h3>
+  <p>2.0 clo 大约是"0℃ 静态活动"的保暖需求，一件中等厚度中层或薄羽绒的量级。下面按各自的实测效率换算成面密度需求。</p>
+
+  <figure>
+    <div id="fig-mass"></div>
+    <figcaption><b>图 2｜同样做到 2.0 clo，各材料需要的克重（每平方米）。</b>羽绒 62 g，最好的合成棉 115 g，抓绒 680 g。注意这是<b>材料面密度</b>，不含面料和结构；按各自单一实测点线性外推，忽略了密度效应。</figcaption>
+  </figure>
+
+  <h3>抓绒的 100 / 200 / 300 是营销编号</h3>
+  <p>这是整套数据里最值得记住的一条。Seeber 测了十块抓绒，发现产品名字里的克重等级和实测保暖<strong>没有相关性</strong>。</p>
+  <p>最典型的：Polartec 300 Coyote 是十块里最重的（370 g/m²），保暖倒数第一（0.52 clo）。Polartec 100 Pewter 是最轻的（188 g/m²），保暖排第二（0.61 clo）。</p>
+  <p>原因在结构不在克重。抓绒保暖靠的是表面绒毛锁住的静止空气层，毛高、毛密度、底层针织结构的影响远大于每平米多少克。同样标 200，双面绒（double velour）和单面格子绒（grid）能差出 40%。</p>
+  <p class="note">这条对买衣服的直接含义：别按"200 克抓绒""300 克抓绒"挑。摸厚度、看结构，或者干脆认牌子认型号（Patagonia R1 是格子绒，R2 是长毛，这是结构差异不是克重差异）。</p>
+
+  <h3>没进表的几个</h3>
+  <p>Thermolite（T 棉）、新雪丽的几个衍生型号、国产三维中空棉，都没进主表。不是不重要，是找不到同口径的实测——网上流传的 0.5–0.68、0.33–0.84 混着厂商标称和整衣反推，塞进同一张表就是作弊。</p>
+  <p>能说的只有量级：普通三维中空棉大约是真 P 棉的六成；T 棉的高端型号（Extreme）接近银标 P 棉；"仿丝棉""喷胶棉"这类差一个档次，clo 值不到 0.3，只适合做内衬和廉价棉服。</p>
+</section>
+
+<section>
+  <div class="secnum">03 / 羽绒</div>
+  <h2>蓬松度买的是重量，不是温度</h2>
+  <p class="lede">整个户外圈对蓬松度的理解基本都是错的。FP 不是保暖指标，它是"每盎司能撑起多大体积"的指标。撑起体积的是空气，保暖的是空气，不是绒。</p>
+
+  <h3>先拆单位</h3>
+  <p>美标（IDFB 10-B）：1 盎司羽绒在标准圆筒里自然膨开占多少立方英寸。800 蓬 = 800 in³/oz。<br>
+  欧标（EN 12130）：30 克羽绒在圆筒里的高度，单位毫米。<br>
+  国标（GB/T 17685）：跟欧标接近，用毫米。</p>
+  <p>同一个样品，美标数字通常比欧标高 10% 左右。所以欧洲品牌标 800、美国品牌标 850，很可能是同一批绒。跨国比参数之前先看用的是哪个标准。</p>
+  <p>换算成"每克体积"：1 in³/oz = 0.578 cm³/g。800 蓬 = 462 cm³/g。这个数字才是物理量，可以直接进热传导计算。</p>
+
+  <h3>FP 涨 33%，保暖只涨 7%</h3>
+  <p>这里有一组难得干净的实验数据：某厂商做了 5 条完全相同的睡袋，每条填 22 盎司（624 克）绒，唯一变量是蓬松度，从 600 到 800 每 50 一档。送到 EN 13537 认证实验室测。</p>
+  <p>结果：<strong>蓬松度每增加 50，睡袋保暖增加约 0.1 clo</strong><sup>[5]</sup>。</p>
+
+  <figure>
+    <div id="fig-fp"></div>
+    <figcaption><b>图 3｜充绒量固定时，蓬松度对保暖的贡献。</b>600→800 蓬，蓬松度涨 33%，保暖只涨 6.7%。基准值按 6.0 clo 估算。</figcaption>
+  </figure>
+
+  <p>为什么会这样？因为睡袋的厚度是被隔仓（baffle）高度限死的。你往里塞 800 蓬的绒，它撑不到 800 蓬该有的体积——空间就那么大。多出来的蓬松度浪费了。</p>
+  <p>反过来，如果隔仓高度固定，用高蓬绒可以<strong>少填一些</strong>达到同样厚度。这才是 FP 的真正价值：<span class="hl">同样保暖下更轻、更能压缩</span>，不是同样重量下更暖。</p>
+  <p>所以那些标着"1000 蓬、充绒 85 克"的轻量羽绒服，暖不暖跟 1000 蓬没关系，跟那 85 克有关系。85 克绒就是 85 克绒，撑死做到 2 clo 出头，零下五度站半小时就透。</p>
+
+  <h3>鸭绒和鹅绒，同蓬松度下没差别</h3>
+  <p>这条有论文。Leeds 大学那篇专门研究羽绒结构与性能的博士论文，做了鹅绒、鸭绒、绒鸭绒的对照测试，结论很直接：</p>
+  <p><em>"鹅绒和鸭绒填充测试方块的热阻极其相似，但面料内羽绒的密度强烈影响其热阻。"</em><sup>[4]</sup></p>
+  <p>翻译一下：同样蓬松度、同样填充密度下，鸭绒和鹅绒的保暖没有可测差异。决定保暖的是密度，不是物种。</p>
+  <p>两者真正的差别在别处：</p>
+  <p><strong>蓬松度上限。</strong>鹅绒能到 1000 蓬，鸭绒商业品大概 800 封顶。鹅大、绒朵大，这是生理决定的。<br>
+  <strong>抗压缩性。</strong>同一篇论文测出来鹅绒比鸭绒抗压，因为鹅绒羽支是异形中空截面，鸭绒是实心椭圆。这影响长期压缩后的蓬松恢复。<br>
+  <strong>价格。</strong>2026 年 10 月国内原料价：90% 白鸭绒 536 元/kg，90% 白鹅绒 929 元/kg，95% 白鹅绒 1050 元/kg<sup>[6]</sup>。鹅绒贵 73%。</p>
+  <p>所以你为鹅绒多付的钱，买的是更高的蓬松度上限、更好的耐久、和一点心理安慰。不是"更暖"。一件 700 蓬鸭绒服和一件 700 蓬鹅绒服，第一年穿起来一模一样。</p>
+
+  <h3>国内买羽绒服，别看蓬松度</h3>
+  <p>GB/T 14272-2021 不强制标蓬松度，强制标的是<strong>绒子含量</strong>（旧国标叫含绒量）和<strong>充绒量</strong>。绒子含量 90% 意味着绒朵占九成，剩下是羽丝和杂质。</p>
+  <p>实际购买顺序应该是：充绒量（克）→ 绒子含量（%）→ 蓬松度（如果有标）→ 鸭还是鹅。前两个决定暖不暖，后两个决定轻不轻、贵不贵。</p>
+  <p class="note">顺便说一个坑：绒子含量是检测值，不是投料值。有些便宜货靠"胶水绒"（用助剂把碎绒丝粘成绒朵）把检测数据做上去，穿两次就散。这个国标管不住，只能靠价格和渠道判断——90% 白鸭绒原料就 536 元/kg，一件充绒 150 克的衣服光绒成本就 80 元，卖 199 的，自己算。</p>
+</section>
+
+<section>
+  <div class="secnum">04 / 湿态</div>
+  <h2>湿了以后，全部重排</h2>
+  <p class="lede">干态数据只适用于干态。而户外最常见的失温场景恰恰是湿冷——出汗、雨雪、帐篷结露。这时候材料的排序会变。</p>
+
+  <h3>一份 1983 年的国防报告，到现在还没被推翻</h3>
+  <p>加拿大国防研究机构（DREO）做过一组很扎实的实验：把聚酯絮片和羽绒/羽毛混合填充物分别浸水，控制含水率，测热阻变化。</p>
+  <p>关键数字：<strong>含水率达到 50%（水质量 / 干材料质量）时，聚酯絮片保留干态热阻的 35%，羽绒只剩 23%</strong><sup>[3]</sup>。</p>
+  <p>而且有个反直觉的细节：聚酯的吸水总量是羽绒的两倍，但热阻保持得更好。原因是聚酯纤维本身不吸水，水只存在于纤维间隙，蓬松结构还在；羽绒吸水后绒朵直接塌缩，空气仓没了。</p>
+
+  <figure>
+    <div id="fig-wet"></div>
+    <figcaption><b>图 4｜湿态热阻保留率。</b>左边两根是实验室浸透条件（含水 50%），右边两根是厂商标称的"潮湿状态"——两者不是一回事，别混着比。见下方说明。</figcaption>
+  </figure>
+
+  <p>右边两根要单独解释。Primaloft 官方说 Gold 湿态保留 96%，羽绒厂商说疏水羽绒能保留 80%。这些数字不假，但它们的"湿"指的是<strong>受潮、表面沾水、高湿环境</strong>，不是"泡透再甩干"。</p>
+  <p>两套数据说的不是一件事：<br>
+  <strong>受潮</strong>（相对湿度 90%、淋了点雨）——疏水羽绒确实能撑住大部分保暖，P 棉几乎不受影响。<br>
+  <strong>浸透</strong>（掉河里、睡袋泡水、连续多天帐篷结露）——羽绒直接崩到 20% 出头，P 棉也只剩三分之一。</p>
+  <p>营销话术偷换的就是这个。看到"湿了还暖"要问一句：多湿。</p>
+
+  <h3>疏水羽绒值不值</h3>
+  <p>DWR 处理（DownTek、DriDown、ExpeDRY 这类）在绒朵表面镀一层拒水膜，能推迟吸水 30–60 分钟，加快干燥。它不改变"浸透后崩掉"这个物理事实，只是让你有更多时间在雨里走到营地。</p>
+  <p>对多天潮湿环境（川西、滇西北、冬季海边）有用，对单日干燥环境是溢价。而且处理层会随洗涤衰减，洗十次以后效果打折。</p>
+</section>
+
+<section>
+  <div class="secnum">05 / 成本</div>
+  <h2>每块钱买到多少 clo</h2>
+  <p class="lede">这一段全是估算，但有锚点：羽绒用 2026 年 10 月的国内原料现货价，合成棉和抓绒用面料批发价的公开区间。不含面料、加工、品牌溢价。</p>
+
+  <h3>原料成本对比</h3>
+  <div class="tblwrap">
+    <table>
+      <thead><tr>
+        <th>材料</th><th>参考单价<br>元/kg</th><th>达到 2.0 clo<br>需克重 g/m²</th><th>材料成本<br>元/m²</th><th>每元买到<br>clo</th>
+      </tr></thead>
+      <tbody id="tbl-cost"></tbody>
+    </table>
+  </div>
+  <p class="cap">羽绒价：90% 白鸭绒 536、90% 白鹅绒 929、95% 白鹅绒 1050 元/kg（2026-10，羽绒金网 / 平湖指数）<sup>[6]</sup>。合成棉按面料批发 250–450 元/kg 估算，抓绒按 120–180 元/kg 估算。<b>这些是材料价，不是衣服价。</b>抓绒一行为外推值——实际产品最厚约 370 g/m²，单层做不到 2 clo，需要叠穿。</p>
+
+  <p>结果有点意外：<strong>最便宜的不是抓绒，是 C 棉</strong>。因为抓绒要达到同样保暖，得用六倍的重量，省下的单价全被重量吃回去了。</p>
+  <p>羽绒贵在单价，但用量少，最后每平米成本和 P 棉打平。这就是为什么"羽绒服比棉服贵"更多是品牌定位问题，不是材料成本问题——一件充绒 120 克的羽绒服，绒成本 110 块；一件同保暖的 P 棉服，棉成本 60 块。差 50 块，终端价差 500 块。</p>
+
+  <h3>合成棉内部的溢价</h3>
+  <p>金标 P 棉比银标贵一倍，实测保暖只高 10–20%（0.47–0.55 vs 0.45）。C 棉 Apex 和金标几乎打平（0.58 vs 0.47–0.55），价格还低一档。</p>
+  <p>所以在这个品类里，<span class="hl">C 棉 Apex 是性价比最优解</span>，金标 P 棉买的是手感（更软、更像羽绒）和品牌背书，不是保暖。</p>
+  <p>Thinsulate 的 clo/oz 只有 0.24，看着很差。但它的定位本来就不是"每克最暖"，是"同样保暖下最薄"（clo/inch 3.02，跟 P 棉同级）。用在手套、鞋靴、需要灵活性的部位是对的，拿它做主力保暖层是选错了。</p>
+</section>
+
+<section>
+  <div class="secnum">06 / 选择</div>
+  <h2>按场景，不按参数</h2>
+  <p class="lede">参数只能排序，不能替你决定。真正决定选什么的，是这四个问题：湿不湿、动不动、几度、背不背。</p>
+
+  <table class="scenario">
+    <thead><tr><th>场景</th><th>选什么</th><th>为什么</th></tr></thead>
+    <tbody>
+      <tr><td>营地静态<br>−10℃ 以下</td><td class="pick">高蓬羽绒</td><td>干冷环境下没有对手。同样保暖轻一半，压缩体积小一半。充绒量比蓬松度重要。</td></tr>
+      <tr><td>高输出<br>徒步/攀登</td><td class="pick">Alpha / 格子抓绒</td><td>要的是透气不是保暖。Alpha 的 clo/oz 只有 0.20，但它排汗快、不闷、湿了不塌，动态场景的最优解。</td></tr>
+      <tr><td>湿冷多雨<br>连续多天</td><td class="pick">C 棉 / 金标 P 棉</td><td>浸透后还有三分之一保暖，羽绒只剩两成。多天行程里这个差别是安全问题不是舒适问题。</td></tr>
+      <tr><td>日常通勤<br>−5 到 10℃</td><td class="pick">650 蓬鸭绒 / 银标 P 棉</td><td>这个温度区间用不到高端材料。买充绒量够的便宜羽绒，或者便宜的合成棉，剩下的钱买鞋。</td></tr>
+      <tr><td>预算优先</td><td class="pick">C 棉 Apex</td><td>单位保暖成本最低，耐久比短纤 P 棉好（连续长丝不易移位），湿态表现不差。</td></tr>
+      <tr><td>极限轻量</td><td class="pick">850+ 羽绒</td><td>只有这里高蓬松度的溢价是值的。每克都算钱的时候，FP 的意义才成立。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>三个不要买</h3>
+  <p><strong>充绒 80 克以下、标 1000 蓬的"轻量羽绒服"。</strong>它的保暖上限被充绒量锁死，蓬松度只是让你多付钱。当中间层穿可以，当外套穿会冷。</p>
+  <p><strong>标"P 棉"但没有 Primaloft 授权标的棉服。</strong>国内"P 棉"已经变成泛称，很多是普通三维中空棉（clo/oz 大约 0.3–0.4，只有真 P 棉的六成）。看吊牌有没有 PrimaLoft 商标和型号。</p>
+  <p><strong>300 克抓绒当保暖层。</strong>实测 300 双面绒比 200 双面绒重 17%，保暖反而低 18%。多出来的重量换成羽绒，能多出三倍保暖。</p>
+</section>
+
+<section>
+  <div class="secnum">07 / 数据来源</div>
+  <h2>出处</h2>
+  <p class="lede">每个数字都能追到下面某一条。带 [n] 的地方对应这里。</p>
+  <ul class="src">
+    <li>[1] Seeber, S. <em>By the Numbers: Thermal Performance Measurements of Synthetic Insulations</em> / <em>By the Numbers: Rethinking Fleece</em>. Backpacking Light, 2021–2022. 防护热板法，参照 ASTM D1518-11a、ASTM F1868-02、ISO 11092；intrinsic 值已扣除表面空气膜。<br><a href="https://backpackinglight.com/by-the-numbers-thermal-performance-measurements-of-fleece-insulations/">backpackinglight.com/by-the-numbers-thermal-performance-measurements-of-fleece-insulations</a></li>
+    <li>[2] PrimaLoft, Inc. <em>Gold Insulation Eco</em> 技术资料（Item #I-1011）：0.92 clo/oz/yd² 干态、0.90 湿态，ASTM C518，Hohenstein 实验室测试。Allied Feather + Down 公开声明不对单一品质羽绒标定 clo 值。</li>
+    <li>[3] Defence Research Establishment Ottawa. <em>Heat Loss Through Wet Clothing Insulation</em>. DR52-18-36, 1983. 含水率 50% 条件下聚酯絮片保留 35% 干态热阻、羽绒/羽毛混合填充保留 23%。<br><a href="https://publications.gc.ca/collections/collection_2024/rddc-drdc/DR52-18-36-1983-eng.pdf">publications.gc.ca — DR52-18-36-1983</a></li>
+    <li>[4] 博士学位论文. <em>The structure and properties of down feathers and their use in the outdoor industry</em>. University of Leeds / White Rose eTheses. 鹅绒与鸭绒填充方块热阻"极其相似"；鹅绒抗压缩性优于鸭绒；羽绒密度对热阻的影响大于物种。<br><a href="https://etheses.whiterose.ac.uk/id/eprint/9268/">etheses.whiterose.ac.uk/id/eprint/9268</a></li>
+    <li>[5] 厂商委托 EN 13537 认证实验室测试：5 条同款睡袋，各充 22 oz（624 g）羽绒，蓬松度 600–800 每 50 一档。结论为蓬松度每 +50 in³/oz，保暖 +0.1 clo。数据经 BPL 论坛披露，非公开发表。<br><a href="https://backpackinglight.com/forums/topic/33188">backpackinglight.com/forums/topic/33188</a></li>
+    <li>[6] 平湖·中国羽绒服指数（2026 年 10 月下旬）/ 羽绒金网原料报价：50% 白鸭绒 244.92、90% 白鸭绒 535.62、90% 白鹅绒 929.04、95% 白鹅绒 1049.58 元/kg。<br><a href="https://www.chinaprice.cn/slkjzsjcqkbg/61915.jhtml">chinaprice.cn — 2026年10月下旬</a></li>
+  </ul>
+  <p class="note" style="margin-top:24px">口径提醒：本页所有 clo 均为 intrinsic 值（扣除表面空气膜），与成衣整体保暖值（ASTM F1291 暖体假人法）不可直接比较。成衣还要再打折 20–40%，因为缝线、拉链、开口、版型都是冷桥。羽绒一列为整衣反推的估算区间，非热板实测。</p>
+</section>
+
+<footer>
+  保暖材料硬数据 · 2026 年 11 月<br>
+  数据集：20 种材料 / 5 组独立实验 / 6 个数据源。图表为内联 SVG 手绘，无外部依赖，可离线保存。
+</footer>
+
+</div>
+
+<script>
+/* ============================================================
+   数据
+   ============================================================ */
+
+// 口径对照：厂商标称 vs 流传表 vs 热板实测
+const GAP = [
+  {n:'Climashield Apex 6 oz', type:'连续长丝聚酯', claimed:0.82, folk:0.82, real:0.58},
+  {n:'Primaloft Gold 6 oz', type:'短纤聚酯', claimed:0.92, folk:0.92, real:0.47},
+  {n:'Primaloft Silver 3 oz', type:'短纤聚酯', claimed:0.79, folk:0.79, real:0.45},
+  {n:'Polartec 200 抓绒', type:'针织摇粒', claimed:0.14, folk:0.16, real:0.10},
+  {n:'Thinsulate 200 g/m²', type:'聚烯烃/聚酯', claimed:null, folk:0.33, real:0.24},
+  {n:'800 蓬羽绒', type:'天然羽绒', claimed:null, folk:1.68, real:1.10}
+];
+
+// 主表：合成棉 + 抓绒，Seeber 热板实测
+const SYNTH = [
+  {n:'Climashield Apex 6 oz', sub:'连续长丝', cat:'synth', w:203, t:20.3, clo:3.44, co:0.58, ci:2.41},
+  {n:'Primaloft Gold 6 oz',   sub:'短纤',     cat:'synth', w:203, t:17.5, clo:3.34, co:0.47, ci:3.09},
+  {n:'Climashield Apex 5 oz', sub:'连续长丝', cat:'synth', w:170, t:18.0, clo:2.84, co:0.59, ci:2.81},
+  {n:'Primaloft Gold 3 oz',   sub:'短纤',     cat:'synth', w:102, t:10.7, clo:1.78, co:0.55, ci:2.97},
+  {n:'Primaloft Silver 3 oz', sub:'短纤',     cat:'synth', w:102, t:12.3, clo:1.40, co:0.45, ci:2.54},
+  {n:'Climashield Apex 2.5 oz', sub:'连续长丝', cat:'synth', w:85, t:9.1, clo:1.22, co:0.51, ci:3.12},
+  {n:'Thinsulate 200 g/m²',   sub:'超细纤维', cat:'synth', w:200, t:13.4, clo:1.75, co:0.24, ci:3.02},
+  {n:'Polartec Power Fill 100', sub:'连续长丝', cat:'synth', w:100, t:7.2, clo:0.99, co:0.36, ci:3.19},
+  {n:'Polartec Alpha',        sub:'动态保暖', cat:'synth', w:null, t:6.1, clo:0.61, co:0.20, ci:2.56},
+  {n:'Polartec Alpha Direct', sub:'动态保暖', cat:'synth', w:null, t:4.6, clo:0.41, co:0.15, ci:2.27},
+  {n:'Polartec 100 双面绒',   sub:'双面摇粒', cat:'fleece', w:279, t:6.3, clo:0.89, co:0.11, ci:3.59},
+  {n:'Polartec 200 双面绒',   sub:'双面摇粒', cat:'fleece', w:278, t:5.8, clo:0.82, co:0.10, ci:3.59},
+  {n:'Polartec 300 双面绒',   sub:'双面摇粒', cat:'fleece', w:324, t:5.2, clo:0.67, co:0.07, ci:3.29},
+  {n:'Polartec 100 (薄批)',   sub:'单面摇粒', cat:'fleece', w:188, t:4.1, clo:0.61, co:0.11, ci:3.83},
+  {n:'Polartec 300 (厚批)',   sub:'单面摇粒', cat:'fleece', w:370, t:3.9, clo:0.52, co:0.05, ci:3.37},
+  {n:'Thermal Pro Hi Loft',   sub:'长毛猴',   cat:'fleece', w:218, t:5.5, clo:0.78, co:0.12, ci:3.63},
+  {n:'Thermal Pro 轻量',      sub:'短毛',     cat:'fleece', w:194, t:2.6, clo:0.39, co:0.07, ci:3.71}
+];
+
+// 羽绒：整衣反推的估算区间
+const DOWN = [
+  {n:'850 蓬', co:1.17, ci:4.6, note:'外推'},
+  {n:'800 蓬', co:1.10, ci:4.5, note:'估算中值'},
+  {n:'650 蓬', co:0.90, ci:4.2, note:'估算中值'},
+  {n:'550 蓬', co:0.75, ci:3.9, note:'估算中值'}
+];
+
+// 成本
+const COST = [
+  {n:'95% 白鹅绒 800 蓬', price:1050, mass:62,  clo2:2.0},
+  {n:'90% 白鹅绒 650 蓬', price:929,  mass:75,  clo2:2.0},
+  {n:'90% 白鸭绒 650 蓬', price:536,  mass:75,  clo2:2.0},
+  {n:'Climashield Apex',  price:300,  mass:115, clo2:2.0},
+  {n:'Primaloft Gold',    price:420,  mass:130, clo2:2.0},
+  {n:'Primaloft Silver',  price:280,  mass:151, clo2:2.0},
+  {n:'Thinsulate',        price:220,  mass:283, clo2:2.0},
+  {n:'抓绒 200 双面',     price:150,  mass:678, clo2:2.0}
+];
+
+/* ============================================================
+   工具
+   ============================================================ */
+const f2 = v => v.toFixed(2);
+const f1 = v => v.toFixed(1);
+const $ = id => document.getElementById(id);
+const NS = 'http://www.w3.org/2000/svg';
+
+let CUR = null;   // 当前正在绘制的 svg
+
+function el(tag, attrs, parent){
+  const e = document.createElementNS(NS, tag);
+  for(const k in attrs) e.setAttribute(k, attrs[k]);
+  if(parent) parent.appendChild(e);
+  return e;
+}
+function txt(x, y, s, o={}){
+  const t = el('text', {
+    x, y,
+    'font-size': o.size || 11,
+    fill: o.fill || '#666',
+    'text-anchor': o.anchor || 'start',
+    'font-weight': o.weight || 400,
+    'font-family': '-apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Microsoft YaHei,sans-serif'
+  });
+  t.textContent = s;
+  if(CUR) CUR.appendChild(t);
+  return t;
+}
+
+/* ============================================================
+   表 1：口径差额
+   ============================================================ */
+(function(){
+  const tb = $('tbl-gap');
+  GAP.forEach(r=>{
+    const ratio = r.claimed ? Math.round(r.real / r.claimed * 100) : null;
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + r.n + '<span class="cat">' + r.type + '</span></td>' +
+      '<td>' + (r.claimed ? f2(r.claimed) : '<span class="mute">—</span>') + '</td>' +
+      '<td>' + f2(r.folk) + '</td>' +
+      '<td class="' + (r.n.includes('羽绒') ? '' : 'best') + '">' + f2(r.real) + '</td>' +
+      '<td>' + (ratio ? ratio + '%' : '<span class="mute">—</span>') + '</td>';
+    tb.appendChild(tr);
+  });
+})();
+
+/* ============================================================
+   表 2：主表
+   ============================================================ */
+(function(){
+  const tb = $('tbl-main');
+  SYNTH.forEach(r=>{
+    const perGram = (r.co * 0.0295).toFixed(4);
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + r.n + '<span class="cat">' + r.sub + '</span></td>' +
+      '<td>' + (r.w ? r.w : '<span class="mute">—</span>') + '</td>' +
+      '<td>' + f1(r.t) + '</td>' +
+      '<td>' + f2(r.clo) + '</td>' +
+      '<td class="' + (r.co >= 0.5 ? 'best' : '') + '">' + f2(r.co) + '</td>' +
+      '<td>' + f2(r.ci) + '</td>' +
+      '<td>' + perGram + '</td>';
+    tb.appendChild(tr);
+  });
+  // 羽绒三行
+  DOWN.forEach(r=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + r.n + ' 羽绒<span class="cat">天然 · 整衣反推</span></td>' +
+      '<td><span class="mute">—</span></td>' +
+      '<td><span class="mute">—</span></td>' +
+      '<td><span class="mute">—</span></td>' +
+      '<td class="best">' + f2(r.co) + '</td>' +
+      '<td>' + f1(r.ci) + '</td>' +
+      '<td>' + (r.co * 0.0295).toFixed(4) + '</td>';
+    tb.appendChild(tr);
+  });
+})();
+
+/* ============================================================
+   表 3：成本
+   ============================================================ */
+(function(){
+  const tb = $('tbl-cost');
+  COST.forEach(r=>{
+    const cost = r.price * r.mass / 1000;
+    const pv = r.clo2 / cost;
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + r.n + '</td>' +
+      '<td>' + r.price + '</td>' +
+      '<td>' + r.mass + '</td>' +
+      '<td>' + f1(cost) + '</td>' +
+      '<td class="' + (pv >= 0.045 ? 'best' : '') + '">' + pv.toFixed(3) + '</td>';
+    tb.appendChild(tr);
+  });
+})();
+
+/* ============================================================
+   图 1：散点
+   ============================================================ */
+(function(){
+  const W=760, H=470, ml=86, mr=28, mt=52, mb=62;
+  const svg = el('svg', {viewBox:'0 0 ' + W + ' ' + H, width:'100%', role:'img'});
+  $('fig-scatter').appendChild(svg);
+  CUR = svg;
+
+  const X0=0, X1=1.3, Y0=2.0, Y1=5.0;
+  const sx = v => ml + (v-X0)/(X1-X0)*(W-ml-mr);
+  const sy = v => H-mb - (v-Y0)/(Y1-Y0)*(H-mt-mb);
+
+  // 网格
+  for(let x=0; x<=1.2; x+=0.2){
+    el('line',{x1:sx(x),y1:mt,x2:sx(x),y2:H-mb,stroke:'#eee','stroke-width':1},svg);
+    txt(sx(x), H-mb+20, x.toFixed(1), {anchor:'middle', size:11, fill:'#999'}).setAttribute('y', H-mb+20);
+  }
+  for(let y=2; y<=5; y+=0.5){
+    el('line',{x1:ml,y1:sy(y),x2:W-mr,y2:sy(y),stroke:'#eee','stroke-width':1},svg);
+    txt(ml-10, sy(y)+4, y.toFixed(1), {anchor:'end', size:11, fill:'#999'});
+  }
+  // 轴
+  el('line',{x1:ml,y1:H-mb,x2:W-mr,y2:H-mb,stroke:'#bbb','stroke-width':1.2},svg);
+  el('line',{x1:ml,y1:mt,x2:ml,y2:H-mb,stroke:'#bbb','stroke-width':1.2},svg);
+
+  txt((ml+W-mr)/2, H-16, '重量效率  →  clo per oz/yd²', {anchor:'middle', size:12, fill:'#666', weight:600});
+  txt(ml-42, H/2, '厚度效率  clo/inch', {anchor:'middle', size:12, fill:'#666', weight:600})
+    .setAttribute('transform','rotate(-90 ' + (ml-42) + ' ' + (H/2) + ')');
+
+  // 阴影区：羽绒优势带
+  el('rect',{
+    x:sx(0.70), y:sy(4.9), width:sx(1.20)-sx(0.70), height:sy(3.7)-sy(4.9),
+    fill:'#a63a2b', opacity:0.05
+  },svg);
+
+  const colors = {synth:'#2b5d7d', fleece:'#6b6b47', down:'#a63a2b'};
+
+  // 点
+  SYNTH.forEach(r=>{
+    const rad = r.w ? 4 + Math.min(r.w,380)/380*8 : 5;
+    el('circle',{
+      cx:sx(r.co), cy:sy(r.ci), r:rad,
+      fill:colors[r.cat], opacity:0.72
+    },svg);
+  });
+  DOWN.filter(d => d.n !== '850 蓬').forEach(r=>{
+    el('circle',{
+      cx:sx(r.co), cy:sy(r.ci), r:9,
+      fill:'none', stroke:colors.down, 'stroke-width':2, 'stroke-dasharray':'3 2'
+    },svg);
+    el('circle',{cx:sx(r.co),cy:sy(r.ci),r:3.5,fill:colors.down},svg);
+  });
+
+  // 标注
+  const label = (x,y,s,dx,dy,anchor) => {
+    const t = txt(sx(x)+dx, sy(y)+dy, s, {size:11, fill:'#444', anchor:anchor||'start'});
+    return t;
+  };
+  label(0.58, 2.41, 'Apex 6oz', 12, 4);
+  label(0.47, 3.09, 'Gold 6oz', -12, -8, 'end');
+  label(0.24, 3.02, 'Thinsulate', 10, 14);
+  label(0.20, 2.56, 'Alpha', -10, 16, 'end');
+  label(0.07, 3.29, 'P300', 10, 12);
+  label(0.12, 3.63, 'Hi Loft', 10, -8);
+  label(1.10, 4.5, '800 蓬', 14, 4);
+  label(0.90, 4.2, '650 蓬', 12, 4);
+  label(0.75, 3.9, '550 蓬', 12, 4);
+
+  // 图例：顶部横向
+  const items = [
+    {t:'合成棉（絮片）', c:colors.synth, hollow:false, w:132},
+    {t:'抓绒', c:colors.fleece, hollow:false, w:66},
+    {t:'羽绒（整衣估算）', c:colors.down, hollow:true, w:150}
+  ];
+  let lx = ml;
+  const ly = 20;
+  items.forEach(it=>{
+    if(it.hollow){
+      el('circle',{cx:lx,cy:ly,r:6,fill:'none',stroke:it.c,'stroke-width':2,'stroke-dasharray':'3 2'},svg);
+    }else{
+      el('circle',{cx:lx,cy:ly,r:5.5,fill:it.c,opacity:0.8},svg);
+    }
+    txt(lx+15, ly+4, it.t, {size:11.5, fill:'#666'});
+    lx += it.w;
+  });
+})();
+
+/* ============================================================
+   图 2：达到 2 clo 的克重
+   ============================================================ */
+(function(){
+  const rows = [
+    {n:'800 蓬羽绒', v:62,  c:'#a63a2b'},
+    {n:'650 蓬羽绒', v:75,  c:'#a63a2b'},
+    {n:'Apex 5 oz',  v:115, c:'#2b5d7d'},
+    {n:'Apex 6 oz',  v:117, c:'#2b5d7d'},
+    {n:'Gold 3 oz',  v:123, c:'#2b5d7d'},
+    {n:'Apex 2.5 oz',v:133, c:'#2b5d7d'},
+    {n:'Gold 6 oz',  v:144, c:'#2b5d7d'},
+    {n:'Silver 3 oz',v:151, c:'#2b5d7d'},
+    {n:'Power Fill', v:188, c:'#2b5d7d'},
+    {n:'Thinsulate', v:283, c:'#2b5d7d'},
+    {n:'Alpha',      v:339, c:'#2b5d7d'},
+    {n:'抓绒 200',   v:678, c:'#6b6b47'},
+    {n:'抓绒 300',   v:969, c:'#6b6b47'}
+  ];
+  const W=760, rowH=26, ml=110, mr=70, mt=16, mb=44;
+  const H = mt + rows.length*rowH + mb;
+  const svg = el('svg',{viewBox:'0 0 '+W+' '+H, width:'100%', role:'img'});
+  $('fig-mass').appendChild(svg);
+  CUR = svg;
+
+  const maxV = 1000;
+  const bw = W-ml-mr;
+
+  // 竖向网格
+  for(let v=0; v<=1000; v+=250){
+    const x = ml + v/maxV*bw;
+    el('line',{x1:x,y1:mt,x2:x,y2:H-mb,stroke:'#eee','stroke-width':1},svg);
+    txt(x, H-mb+18, v, {anchor:'middle', size:10.5, fill:'#999'});
+  }
+  txt(ml+bw/2, H-6, '每平方米需要多少克材料', {anchor:'middle', size:11.5, fill:'#666'});
+
+  rows.forEach((r,i)=>{
+    const y = mt + i*rowH + 5;
+    const len = r.v/maxV*bw;
+    el('rect',{x:ml, y:y, width:len, height:rowH-11, fill:r.c, opacity:0.78},svg);
+    txt(ml-9, y+rowH/2-4, r.n, {anchor:'end', size:11.5, fill:'#333'});
+    txt(ml+len+7, y+rowH/2-4, r.v + ' g', {size:11, fill:'#777', weight:600});
+  });
+})();
+
+/* ============================================================
+   图 3：蓬松度边际收益
+   ============================================================ */
+(function(){
+  const W=760, H=380, ml=80, mr=158, mt=28, mb=54;
+  const svg = el('svg',{viewBox:'0 0 '+W+' '+H, width:'100%', role:'img'});
+  $('fig-fp').appendChild(svg);
+  CUR = svg;
+
+  const pts = [
+    {fp:600, clo:6.00},
+    {fp:650, clo:6.10},
+    {fp:700, clo:6.20},
+    {fp:750, clo:6.30},
+    {fp:800, clo:6.40}
+  ];
+  const X0=580, X1=820, Y0=5.6, Y1=8.4;
+  const sx = v => ml + (v-X0)/(X1-X0)*(W-ml-mr);
+  const sy = v => H-mb - (v-Y0)/(Y1-Y0)*(H-mt-mb);
+
+  for(let v=600; v<=800; v+=50){
+    el('line',{x1:sx(v),y1:mt,x2:sx(v),y2:H-mb,stroke:'#f0f0f0','stroke-width':1},svg);
+    txt(sx(v), H-mb+18, v, {anchor:'middle', size:10.5, fill:'#999'});
+  }
+  for(let v=6.0; v<=8.0; v+=0.5){
+    el('line',{x1:ml,y1:sy(v),x2:W-mr,y2:sy(v),stroke:'#f0f0f0','stroke-width':1},svg);
+    txt(ml-8, sy(v)+3.5, v.toFixed(1), {anchor:'end', size:10.5, fill:'#999'});
+  }
+  txt((ml+W-mr)/2, H-10, '美标蓬松度  in³/oz', {anchor:'middle', size:11.5, fill:'#666'});
+  txt(ml-46, H/2, '整袋 clo', {anchor:'middle', size:11.5, fill:'#666'})
+    .setAttribute('transform','rotate(-90 '+(ml-46)+' '+(H/2)+')');
+
+  // 灰虚线：假设隔仓不限高、clo 随 FP 线性增长
+  el('line',{x1:sx(600),y1:sy(6.0),x2:sx(800),y2:sy(8.0),
+    stroke:'#c9c9c9','stroke-width':1.6,'stroke-dasharray':'7 5'},svg);
+  txt(sx(806), sy(8.0)+4, '理论 8.0', {size:11, fill:'#aaa'});
+
+  // 红实线：实测
+  let d = '';
+  pts.forEach((p,i)=>{ d += (i?'L':'M') + sx(p.fp) + ' ' + sy(p.clo) + ' '; });
+  el('path',{d, fill:'none', stroke:'#a63a2b', 'stroke-width':2.6},svg);
+  pts.forEach(p=>{
+    el('circle',{cx:sx(p.fp),cy:sy(p.clo),r:4.5,fill:'#fff',stroke:'#a63a2b','stroke-width':2},svg);
+    txt(sx(p.fp), sy(p.clo)-13, p.clo.toFixed(1), {anchor:'middle', size:10.5, fill:'#a63a2b', weight:600});
+  });
+  txt(sx(806), sy(6.4)+4, '实测 6.4', {size:11.5, fill:'#a63a2b', weight:700});
+
+  el('line',{x1:sx(800),y1:sy(6.4),x2:sx(800),y2:sy(8.0),
+    stroke:'#a63a2b','stroke-width':1,'stroke-dasharray':'2 4',opacity:0.45},svg);
+  txt(sx(800)-9, sy(7.25), '被隔仓吃掉的 1.6 clo', {anchor:'end', size:10.5, fill:'#a63a2b', opacity:0.85});
+})();
+
+/* ============================================================
+   图 4：湿态保留率
+   ============================================================ */
+(function(){
+  const rows = [
+    {n:'聚酯絮片', sub:'实验室浸透 · 含水 50%', v:35,  c:'#2b5d7d'},
+    {n:'羽绒',     sub:'实验室浸透 · 含水 50%', v:23,  c:'#a63a2b'},
+    {n:'金标 P 棉', sub:'厂商标称"潮湿状态"',   v:96,  c:'#7fa3b8'},
+    {n:'疏水羽绒', sub:'厂商标称"潮湿状态"',   v:80,  c:'#c98a7e'}
+  ];
+  const W=760, rowH=64, ml=110, mr=80, mt=20, mb=46;
+  const H = mt + rows.length*rowH + mb;
+  const svg = el('svg',{viewBox:'0 0 '+W+' '+H, width:'100%', role:'img'});
+  $('fig-wet').appendChild(svg);
+  CUR = svg;
+
+  const bw = W-ml-mr;
+  for(let v=0; v<=100; v+=25){
+    const x = ml + v/100*bw;
+    el('line',{x1:x,y1:mt,x2:x,y2:H-mb,stroke:'#eee','stroke-width':1},svg);
+    txt(x, H-mb+18, v+'%', {anchor:'middle', size:10.5, fill:'#999'});
+  }
+  txt(ml+bw/2, H-8, '干态热阻保留率', {anchor:'middle', size:11.5, fill:'#666'});
+
+  rows.forEach((r,i)=>{
+    const y = mt + i*rowH + 8;
+    const len = r.v/100*bw;
+    el('rect',{x:ml,y:y,width:len,height:30,fill:r.c,opacity:0.8},svg);
+    txt(ml-10, y+13, r.n, {anchor:'end', size:12.5, fill:'#222', weight:600});
+    txt(ml-10, y+27, r.sub, {anchor:'end', size:10, fill:'#999'});
+    txt(ml+len+8, y+20, r.v+'%', {size:13, fill:'#333', weight:700});
+  });
+
+  // 分隔线：上两行是实验室浸透，下两行是厂商标称
+  const sepY = mt + 2*rowH - 6;
+  el('line',{x1:ml-104,y1:sepY,x2:W-mr,y2:sepY,stroke:'#ccc','stroke-width':1,'stroke-dasharray':'4 3'},svg);
+  txt(W-mr, sepY-7, '以下为「受潮」条件，与上方不可直接比较', {anchor:'end', size:10, fill:'#999'});
+})();
+</script>
+</body>
+</html>
